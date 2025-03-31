@@ -1,0 +1,22 @@
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/CookieServlet")
+public class CookieServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+
+        // Creating a cookie
+        Cookie userCookie = new Cookie("username", "JohnDoe");
+        userCookie.setMaxAge(60 * 60); // 1 hour
+        response.addCookie(userCookie);
+
+        response.getWriter().println("Cookie stored: Username=JohnDoe");
+    }
+}
