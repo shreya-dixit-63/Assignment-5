@@ -1,0 +1,18 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import javax.servlet.*;
+
+public class LoggingFilter implements Filter {
+    public void init(FilterConfig config) throws ServletException {}
+
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        PrintWriter out = response.getWriter();
+        out.println("Request received at: " + new Date());
+        out.println("IP Address: " + request.getRemoteAddr());
+        chain.doFilter(request, response);
+    }
+
+    public void destroy() {}
+}
